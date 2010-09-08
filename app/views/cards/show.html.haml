@@ -1,0 +1,14 @@
+%section.magicCard
+  %header
+    %h1= @card.title
+  .cost= "Cost: #{@card.cost}"
+  .type= @card.type
+  .ability= @card.ability
+  .flavor_text
+    %i= @card.flavor_text
+  -if @card.power and @card.power != "" and @card.toughness and @card.toughness != ""
+    .power.toughness= "#{@card.power}/#{@card.toughness}"
+  %nav
+    %ul
+      %li= link_to 'make some changes', edit_card_path(@card)
+      %li= link_to 'other cards', cards_path

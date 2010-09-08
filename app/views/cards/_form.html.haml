@@ -1,0 +1,43 @@
+- form_for(@card) do |f|
+  - if @card.errors.any?
+    %section.errorExplanation
+      %header
+        %h1= pluralize(@card.errors.count, 'error') + " kept this card from being saved:"
+      %ul
+        - @card.errors.full_messages.each do |msg|
+          %li= msg
+  
+  .title.field
+    =f.label :title
+    =f.text_field :title
+  
+  .cost.field
+    =f.label :cost
+    =f.text_field :cost
+  
+  .type.field
+    =f.label :type
+    =f.text_field :type
+  
+  .rarity.field
+    =f.label :rarity
+    =f.text_field :rarity
+  
+  .ability.field
+    =f.label :ability
+    =f.text_area :ability
+  
+  .flavor_text.field
+    =f.label :flavor_text
+    =f.text_area :flavor_text
+
+  .power.field
+    =f.label :power
+    =f.text_field :power
+
+  .toughness.field
+    =f.label :toughness
+    =f.text_field :toughness
+  
+  .actions
+    =f.submit
