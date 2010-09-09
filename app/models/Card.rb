@@ -10,6 +10,7 @@ class Card
   field :toughness
   
   referenced_in :user
+  embeds_many :comments
   
   def editor_permissions? the_user
     if the_user == user

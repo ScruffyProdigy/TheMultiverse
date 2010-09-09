@@ -1,0 +1,6 @@
+-form_for [@owner,@comment] do |f|
+  .text.field
+    =f.label :text
+    =f.text_area :text
+  .actions
+    =f.submit

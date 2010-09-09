@@ -1,0 +1,9 @@
+%article.comment
+  %header
+    %h1= "Comment on #{@owner.title}"
+  .text=@comment.text
+  %footer
+    %ul
+      %li= button_to 'trash this comment', [@owner,@comment], :method=>:delete
+      %li= button_to 'edit this comment', edit_card_comment_path(@owner,@comment), :method=>:get
+      %li= button_to 'rest of the thread', card_comments_path(@owner), :method=>:get
