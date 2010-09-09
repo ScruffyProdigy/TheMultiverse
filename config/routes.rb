@@ -3,6 +3,7 @@ Themultiverse::Application.routes.draw do
 
   root :to=> "cards#index"
 
+  resources :users
   resources :cards
   
   # The priority is based upon order of creation:

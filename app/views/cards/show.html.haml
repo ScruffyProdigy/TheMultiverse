@@ -10,5 +10,7 @@
     .power.toughness= "#{@card.power}/#{@card.toughness}"
   %footer
     %ul
-      %li= link_to 'make some changes', edit_card_path(@card)
-      %li= link_to 'other cards', cards_path
+      -if @card.editor_permissions? current_user
+        %li= button_to 'trash this card', @card, :method=>:delete
+        %li= button_to 'make some changes', edit_card_path(@card), :method=>:get
+      %li= button_to 'other cards', cards_path, :method=>:get

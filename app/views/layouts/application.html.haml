@@ -10,7 +10,9 @@
     %header
       %nav#login
         -if user_signed_in?
-          %div="signed in as #{current_user.email}"
+          %div
+            signed in as 
+            =link_to current_user.email, current_user
           %div
             not you?
             =link_to("sign out",destroy_user_session_path)
