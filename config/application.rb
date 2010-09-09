@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
-require 'rails/all'
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "active_resource/railtie"
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -40,7 +42,7 @@ module Themultiverse
     config.filter_parameters += [:password]
     
     config.generators do |g|
-      g.orm :mongo_mapper
+      g.orm :mongoid
       g.template_engine :erb
     end
   end

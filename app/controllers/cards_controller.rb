@@ -37,7 +37,7 @@ class CardsController < ApplicationController
   
   protected
   def find_card
-    @card = Card.find_by_id(params[:id])
+    @card = Card.find(params[:id])
     if @card.nil?
       redirect_to :action=>:index
     end
