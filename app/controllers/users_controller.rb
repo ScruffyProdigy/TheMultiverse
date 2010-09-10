@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class UsersController < ApplicationController
   before_filter :find_user, :only=>[:show,:edit,:update,:destroy]
   
   respond_to :html, :xml, :json

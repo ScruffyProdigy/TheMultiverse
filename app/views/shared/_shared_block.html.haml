@@ -1,0 +1,13 @@
+-user = nil if local_assigns[:user].nil?
+-time = nil if local_assigns[:time].nil?
+-type = "block" if local_assigns[:type].nil?
+-object = nil if local_assigns[:object].nil? or local_assigns[:callback].nil?
+%article.block{:class=>type}
+  .left_side
+    -if user
+      =render :partial=>'users/user_block', :locals=>{:user=>user}
+    -if time
+      =render :partial=>'time/time_block', :locals=>{:time=>time}
+  .right_side
+    -if object
+      =render :partial=>callback, :locals=>{:object=>object}

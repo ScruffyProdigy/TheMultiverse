@@ -1,0 +1,8 @@
+%section.history
+  %ul
+    -events.reverse.each do |event|
+      %li
+        -if event.class == Comment
+          =render :partial=>'comments/comment', :locals=>{:comment=>event}
+        -if event.class == Alteration
+          =render :partial=>'alterations/alteration', :locals=>{:alteration=>event}

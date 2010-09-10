@@ -5,4 +5,4 @@
     -@comments.each do |comment|
       %li= link_to comment.text,[@owner,comment]
   %footer
-    =link_to 'new comment',new_card_comment_path(@owner)#this will need to change once people can comment on more than one thing
+    =link_to 'go back',@owner

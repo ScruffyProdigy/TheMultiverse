@@ -3,7 +3,9 @@ Themultiverse::Application.routes.draw do
 
   root :to=> "cards#index"
 
-  resources :users
+  resources :users do
+    resources :friends
+  end
   resources :cards do
     resources :comments
   end

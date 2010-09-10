@@ -11,6 +11,21 @@ class Card
   
   referenced_in :user
   embeds_many :comments
+  embeds_many :alterations
+  
+  before_save :register_changes
+  
+  def updater= last_updater
+    @updater = last_updater
+  end
+  
+  def updater
+    @updater
+  end
+  
+  def register_changes
+    Alteration.save_changes(self,@updater)
+  end
   
   def editor_permissions? the_user
     if the_user == user
@@ -22,5 +37,10 @@ class Card
   
   def viewer_permissions? the_user
     return true
+  end
+  
+  def events
+    result = comments + alterations
+    result.sort!{|a,b|a.created_at <=> b.created_at}
   end
 end

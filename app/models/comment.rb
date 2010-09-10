@@ -19,4 +19,14 @@ class Comment
   def self.owner_types
     ['cards']
   end
+  
+  def start_save options={}
+    options = {:create=>false}.merge options
+    
+    if options[:create]
+      set_created_at
+    end
+    set_updated_at
+
+  end
 end

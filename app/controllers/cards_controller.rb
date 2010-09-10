@@ -22,6 +22,7 @@ class CardsController < ApplicationController
   def create
     @card = Card.new(params[:card])
     @card.user = current_user
+    @card.updater = current_user
     @card.save
     respond_with @card
   end
@@ -31,7 +32,9 @@ class CardsController < ApplicationController
   end
   
   def update
-    @card.update_attributes(params[:card])
+    @card.attributes = params[:card]
+    @card.updater = current_user
+    @card.save
     respond_with @card
   end
   

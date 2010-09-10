@@ -22,10 +22,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.user = current_user
     @owner.comments<<@comment
-    #begin the following two lines of code are to make up for the fact that Mongoid::Timestamps don't save when they are supposed to
-    @comment.set_created_at
-    @comment.set_updated_at
-    #end
+    @comment.start_save(:create=>true)
     @owner.save
     respond_with @comment, :location=>@owner
   end
@@ -35,9 +32,7 @@ class CommentsController < ApplicationController
   end
   
   def update
-    #begin the following line of code is to make up for the fact that Mongoid::Timestamps don't save when they are supposed to
-    @comment.set_updated_at
-    #end 
+    @comment.start_save
     @comment.update_attributes(params[:comment])
     respond_with @comment, :location=>@owner
   end
