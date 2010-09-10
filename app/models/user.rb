@@ -6,5 +6,6 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
          
   references_many :cards
+  references_many :comments
 
 end

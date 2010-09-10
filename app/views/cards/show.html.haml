@@ -1,5 +1,5 @@
 %article.magicCard
-  %header
+  %header<
     %h1= @card.title
   .cost= "Cost: #{@card.cost}"
   .type= @card.type
@@ -8,6 +8,8 @@
     %i= @card.flavor_text
   -if @card.power and @card.power != "" and @card.toughness and @card.toughness != ""
     .power.toughness= "#{@card.power}/#{@card.toughness}"
+  =render :partial=>'comments/comment_list', :locals=>{:comments=>@card.comments}
+  =render :partial=>'comments/new_comment', :locals=>{:owner=>@card}
   %footer
     %ul
       -if @card.editor_permissions? current_user

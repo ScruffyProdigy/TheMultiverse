@@ -20,9 +20,14 @@ class CommentsController < ApplicationController
   
   def create
     @comment = Comment.new(params[:comment])
+    @comment.user = current_user
     @owner.comments<<@comment
+    #begin the following two lines of code are to make up for the fact that Mongoid::Timestamps don't save when they are supposed to
+    @comment.set_created_at
+    @comment.set_updated_at
+    #end
     @owner.save
-    respond_with @comment, :location=>card_comments_path(@owner)
+    respond_with @comment, :location=>@owner
   end
   
   def edit
@@ -30,52 +35,40 @@ class CommentsController < ApplicationController
   end
   
   def update
+    #begin the following line of code is to make up for the fact that Mongoid::Timestamps don't save when they are supposed to
+    @comment.set_updated_at
+    #end 
     @comment.update_attributes(params[:comment])
-    respond_with @comment, :location=>card_comments_path(@owner)
+    respond_with @comment, :location=>@owner
   end
   
   def destroy
     @comment.delete
-    respond_with @comment, :location=>card_comments_path(@owner)
+    respond_with @comment, :location=>@owner
   end
   
   protected
-  def test_type type
-    string_type = type.to_s
-    symbol_type = (string_type + '_id').to_sym
-    class_type = string_type.capitalize.constantize
-    
-    if params[symbol_type]
-      @owner_type = type
-      @owner = class_type.find(params[symbol_type])
-    end
-  end
   
   def find_owner
-    @owner_type = nil
-    @owner = nil
+    scrap, @owner_type, @owner_id, scrap, @comment_id= request.fullpath.split '/'
     
-    test_type :card
+    unless Comment.owner_types.include? @owner_type
+      redirect_to root_path, :alert=>"comment owner not found"
+    end
     
-    return @owner
+    @owner = @owner_type.singularize.capitalize.constantize.find(@owner_id)
+    
+    if @owner.nil?
+      redirect_to root_path, :alert=>"comment owner not found"
+    end
   end
   
   def find_comment
-    logger.info "finding owner"
-    if @owner.nil?
-      logger.info "owner not found"
-      redirect_to root_path, :alert=>"invalid comment subject"
-      return
-    end
-    logger.info "owner found"
     @comment = @owner.comments.find(params[:id])
-    logger.info "finding comment"
     if @comment.nil?
-      logger.info "comment not found"
-      redirect_to card_comments_path(@owner), :alert=>"comment not found"
+      redirect_to @owner, :alert=>"comment not found"
       return
     end
-    logger.info "comment found - #{@comment.text}"
   end
   
 end

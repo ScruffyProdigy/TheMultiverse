@@ -1,0 +1,7 @@
+%section.commentlist
+  %header<
+    %h1 Comments
+  %ul
+    -comments.each do |comment|
+      %li
+        =render :partial=>'comments/comment', :locals=>{:comment=>comment}

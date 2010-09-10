@@ -1,0 +1,11 @@
+%article.comment
+  %a{:href=>comment.route}
+    -if comment.user
+      .user
+        =comment.user.email
+    -if comment.created_at
+      %time{:datetime=>comment.created_at.to_html5_datetime}
+        =comment.created_at.to_readable_format
+    -if comment.text
+      .message
+        =comment.text

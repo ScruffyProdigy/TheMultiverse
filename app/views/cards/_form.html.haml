@@ -1,7 +1,7 @@
 - form_for(@card) do |f|
   - if @card.errors.any?
     %section.errorExplanation
-      %header
+      %header<
         %h1= pluralize(@card.errors.count, 'error') + " kept this card from being saved:"
       %ul
         - @card.errors.full_messages.each do |msg|
