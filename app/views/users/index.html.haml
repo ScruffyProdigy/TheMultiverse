@@ -1,0 +1,6 @@
+%section.users
+  %ol
+    -@users.each do |user|
+      %li
+        =link_to user.nickname,user
+        =button_to user.nickname,user, :method=>:put

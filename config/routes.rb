@@ -1,13 +1,23 @@
 Themultiverse::Application.routes.draw do
   devise_for :users
 
-  root :to=> "cards#index"
+  root :to=> "home#index"
 
   resources :users do
     resources :friends
+    resources :cards do
+      resources :comments
+    end
   end
   resources :cards do
     resources :comments
+  end
+  resources :sets, :as=>:card_sets do
+    resources :comments
+    resources :cards do
+      resources :comments
+    end
+    resources :slots, :as=>:card_slots
   end
   
   # The priority is based upon order of creation:

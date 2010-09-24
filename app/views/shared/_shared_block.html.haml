@@ -3,11 +3,17 @@
 -type = "block" if local_assigns[:type].nil?
 -object = nil if local_assigns[:object].nil? or local_assigns[:callback].nil?
 %article.block{:class=>type}
-  .left_side
+  .avatar
     -if user
-      =render :partial=>'users/user_block', :locals=>{:user=>user}
-    -if time
-      =render :partial=>'time/time_block', :locals=>{:time=>time}
-  .right_side
-    -if object
-      =render :partial=>callback, :locals=>{:object=>object}
+      =render :partial=>'users/user_avatar', :locals=>{:user=>user}
+  .nonavatar
+    .metadata
+      -if user
+        .user
+          =render :partial=>'users/user_name', :locals=>{:user=>user}
+      -if time
+        =render :partial=>'time/time_block', :locals=>{:time=>time}
+    .content
+      -if object
+        =render :partial=>callback, :locals=>{:object=>object}
+    

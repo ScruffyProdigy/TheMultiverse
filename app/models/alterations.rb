@@ -16,4 +16,8 @@ class Alteration
     object_changed.alterations<<the_alteration
     the_alteration.save
   end
+  
+  def <=>(other)
+    self.created_at <=> other.created_at
+  end
 end

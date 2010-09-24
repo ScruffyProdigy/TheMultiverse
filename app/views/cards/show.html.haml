@@ -1,13 +1,7 @@
 %article.magicCard
   %header<
     %h1= @card.title
-  .cost= "Cost: #{@card.cost}"
-  .type= @card.type
-  .ability= @card.ability
-  .flavor_text
-    %i= @card.flavor_text
-  -if @card.power and @card.power != "" and @card.toughness and @card.toughness != ""
-    .power.toughness= "#{@card.power}/#{@card.toughness}"
+  =render :partial=>"physical", :locals=>{:card=>@card}
   .actions
     %ul
       -if user_signed_in?
@@ -16,5 +10,5 @@
           %li= button_to 'make some changes', edit_card_path(@card), :method=>:get
       %li= button_to 'other cards', cards_path, :method=>:get
   -if user_signed_in?
-    =render :partial=>'shared/shared_block', :locals=>{:user=>current_user,:type=>'new_comment',:object=>@card, :callback=>'comments/new_comment'}
+    =render :partial=>'shared/shared_block', :locals=>{:user=>current_user,:type=>'new_comment',:object=>Array.new(@parents).reverse.push(@card), :callback=>'comments/new_comment'}
   =render :partial=>'events/event_list', :locals=>{:events=>@card.events}

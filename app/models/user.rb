@@ -5,17 +5,59 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  references_many :cards
+  field :nickname
+         
+  embeds_many :cards
   references_many :comments
-#  references_many :users, :stored_as => :array, :inverse_of => :users #represents friends - mongoid doesn't have good support for references_many yet
-  references_many :revisions
+  references_many :alterations  
   
+  field :friends, :type => Array, :default => []
+  field :sets,  :type=> Array, :default=>[]
+  
+  def name
+    nickname
+  end
+  
+  def make_friends(friend,logger=nil)
+    self.add_friend(friend,logger)
+    friend.add_friend(self,logger)
+  end
+  
+  def sets
+    ids = read_attribute(:sets)
+    if ids.nil?
+      ids = []
+    end
+    ids.map { |id| CardSet.find(id)}
+  end
+  
+  def add_set the_set
+    current = read_attribute :sets
+    if current.nil?
+      current = [];
+    end
+    current<< the_set.id
+    write_attribute :sets,current
+    save
+  end
+
   def friends
-    users
+    ids = read_attribute :friends
+    ids.map { |id|  User.find(id)}
   end
   
   def is_friends_with? other_user
-    friends.include? other_user
+    ids = read_attribute :friends
+    ids.include? other_user.id
+  end
+  
+  def add_card the_card,logger
+    logger.info("#{cards.inspect}<<#{the_card.inspect}")
+    cards<<the_card
+  end
+  
+  def find_card card_id
+    return card.find(card_id)
   end
   
   def avatar size=80
@@ -28,6 +70,13 @@ class User
   end
   
 protected
+
+  def add_friend(friend,logger)
+    current = read_attribute :friends
+    current<< friend.id
+    write_attribute :friends,current
+    save
+  end
   # Returns a Gravatar URL associated with the email parameter.
   #
   # Gravatar Options:

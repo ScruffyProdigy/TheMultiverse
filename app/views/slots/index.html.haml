@@ -1,0 +1,12 @@
+-for slot in @slots
+  %article.card_slot{:class=>slot.status}
+    =render :partial => 'tags', :locals=>{:slot=>slot}
+    =form_for @parents.reverse.push slot do |f|
+      =f.text_field :tag_name,  :value=>'', :placeholder=>'tag name'
+      =f.submit 'add tag'
+    -for card in slot.cards
+      =render :partial=>'cards/physical', :locals=>{:card=>card}
+    =link_to 'fill slot',@parents.reverse.push(slot)
+=form_for @parents.reverse do |f|
+  =f.text_field :new_slots, :value=>'', :placeholder=>'number of slots to add'
+  =f.submit 'add card slots'

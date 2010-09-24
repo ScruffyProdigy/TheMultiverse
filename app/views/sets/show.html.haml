@@ -1,0 +1,23 @@
+%section.cardset
+  %header<
+    %h1=  @set.name
+  %section.slotted
+    %header<
+      %h1 slotted
+    =link_to "edit slots",  url_for(@parents.reverse.push @set)+'/slots'
+    -for card in @set.cards.slotted
+      %article.card
+        =render :partial=>'cards/physical', :locals=>{:card=>card}
+  %section.submitted
+    %header<
+      %h1 submitted
+    =link_to "submit a new card", new_card_set_card_path(@set)
+    -for card in @set.cards.submitted
+      %article.card
+        =render :partial=>'cards/physical', :locals=>{:card=>card}
+  %section.cut
+    %header<
+      %h1 cut
+    -for card in @set.cards.cut
+      %article.card
+        =render :partial=>'cards/physical', :locals=>{:card=>card}

@@ -11,12 +11,23 @@
       %nav#login
         -if user_signed_in?
           %div<
-            signed in as #{link_to current_user.email, current_user}
+            signed in as #{link_to "#{current_user.nickname} (#{current_user.email})", current_user}
           %div<
             not you? #{link_to("sign out",destroy_user_session_path)}
         -else
           =link_to "sign in", new_user_session_path
           =link_to "sign up", new_user_registration_path
+    %nav.main
+      %ul
+        %li
+          =link_to "make some new cards!", new_card_path
+        %li  
+          -if user_signed_in?
+            %ul
+              -for set in current_user.sets
+                %li
+                  =link_to set.name, set
+          =link_to "start designing a new set!", new_card_set_path
     -if alert and alert!=""
       .alert= alert
     -if notice and notice!=""

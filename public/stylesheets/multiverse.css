@@ -1,0 +1,259 @@
+/* @override 
+	http://localhost:3000/stylesheets/multiverse.css?1284254877
+	http://localhost:3000/stylesheets/multiverse.css?1284289266
+	http://localhost:3000/stylesheets/multiverse.css?1284507782
+	http://localhost:3000/stylesheets/multiverse.css?1284517850
+	http://localhost:3000/stylesheets/multiverse.css?1284519991
+	http://localhost:3000/stylesheets/multiverse.css?1284582533
+	http://localhost:3000/stylesheets/multiverse.css?1284589527
+	http://localhost:3000/stylesheets/multiverse.css?1284591380
+*/
+section, article, header, footer, nav, aside, hgroup {
+	display: block;
+}
+
+/*
+History Blocks
+*/
+.history {
+	display: block;
+}
+.history ul {
+	list-style: none;
+	display: table;
+}
+.history li {
+	display: table-row;
+	padding:20px;
+}
+
+.block {
+	border-style: solid;
+	border-width: 0 0 2px 2px;
+	background-color: #ffe8d4;
+	margin: 5px;
+}
+
+.alteration.block {
+	background-color: #def;
+	position: relative;
+	left: -40px;
+}
+
+.block div.avatar {
+	width: 160px;
+	float: left;
+	padding: 5px;
+	border-style: solid;
+	border-width: 2px 0px 0px 0px;
+}
+
+.block .nonavatar {
+	margin-left:170px;
+}
+
+.block .content {
+	border-style: solid;
+	border-width: 0px 0px 0px 2px;
+	text-align: center;
+	background: #fff;
+	padding: 5px;
+	margin-bottom: -2px;
+}
+
+.block .content .message {
+	vertical-align: middle;
+}
+
+.block .metadata {
+	padding: 5px;
+	border-style: solid;
+	border-width: 2px 2px 2px 0;
+}
+
+.block .metadata .user{
+	display: inline;}
+
+.block .metadata time{
+	display: inline;
+}
+
+.block div.content:after {
+	content: '.';
+	height: 0;
+	display: block;
+	clear: left;
+	visibility: hidden;
+	margin-bottom: -5px;
+}
+
+.new_comment {
+	display: block;
+	float: none;
+}
+
+form#new_comment {
+	width: 100%;
+}
+
+form#new_comment .text.field {
+}
+
+form#new_comment .text.field textarea#comment_text {
+	height: 100px;
+	width: 90%;
+}
+
+/*
+Physical Magic Card
+*/
+.cards ul{
+	list-style: none;
+	float:left;
+}
+
+.physical{
+	height: 3.5in;
+	width: 2.5in;
+	margin: 0px auto;
+	border-width: .15in;
+	border-style: solid;
+	border-radius: .1in;
+	position: relative;
+	background-color: #be1dce;
+}
+
+
+.physical.white{
+	background-color: #fffbd5;
+}
+.physical.blue{
+	background-color: #aae0fa;
+}
+.physical.black{
+	background-color: #cbc2c0;
+}
+.physical.red{
+	background-color: #f9aa8f;
+}
+.physical.green{
+	background-color: #9bd3ae;
+}
+.physical.multicolor {
+	background-color: #decd00;
+}
+.physical.artifact {
+	background-color: #aaa;
+}
+.physical.land {
+	background-color: #ccb39b;
+}
+
+.physical.white.blue{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #fffbd5), color-stop(0.6, #aae0fa));
+}
+.physical.blue.black{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #aae0fa), color-stop(0.6, #cbc2c0));
+}
+.physical.black.red{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #cbc2c0), color-stop(0.6, #f9aa8f));
+}
+.physical.red.green{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #f9aa8f), color-stop(0.6, #9bd3ae));
+}
+.physical.green.white{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #9bd3ae), color-stop(0.6, #fffbd5));
+}
+.physical.white.black{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #fffbd5), color-stop(0.6, #cbc2c0));
+}
+.physical.blue.red{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #aae0fa), color-stop(0.6, #f9aa8f));
+}
+.physical.black.green{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #cbc2c0), color-stop(0.6, #9bd3ae));
+}
+.physical.red.white{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #f9aa8f), color-stop(0.6, #fffbd5));
+}
+.physical.green.blue{
+		background-image: -webkit-gradient(linear,left bottom,right bottom,
+		color-stop(0.4, #9bd3ae), color-stop(0.6, #aae0fa));
+}
+
+.physical h1, .physical .type, .physical .power.toughness {
+	text-align: left;
+	border-radius: .05in / .15in;
+	border-style: solid;
+	border-width: .03in;
+	font-size: .16in;
+	padding: .025in;
+	background-color: #e4d3ce;
+}
+.physical h1 {
+	height: .2in;
+	margin: .05in .02in -.03in;
+}
+.physical .type {
+	margin: -.03in .02in;
+	height: .175in;
+}
+.physical .power.toughness {
+	position: absolute;
+	right: .02in;
+	bottom: .02in;
+	width: .4in;
+}
+.physical .power.toughness p{
+	text-align: center;
+	margin: 0;
+}
+
+.physical .title {
+	float: left;
+}
+
+.physical .cost {
+	float: right;
+}
+
+.physical .ability_box, .magicCard .physical .picture{
+	border-width: .03in;
+	border-style: solid;
+	margin-right: .05in;
+	margin-left: .05in;
+}
+
+.physical .picture {
+	height: 1.5in;
+}
+
+.physical .picture img {
+	margin: 0;
+}
+
+.physical .ability_box {
+	height: 1.225in;
+	position: relative;
+	background-color: #fff1f2;
+}
+
+.physical .ability_box .flavor_text,.magicCard .physical .ability_box .ability {
+	margin: .035in;
+	font-size: .15in;
+}
+
+.physical .ability_box .flavor_text {
+	font-style: italic;
+	margin-top: .1in;
+	bottom: 0px;
+}

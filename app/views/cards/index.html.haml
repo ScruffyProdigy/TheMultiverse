@@ -5,4 +5,7 @@
     -@cards.each do |card|
       %li= link_to card.title,card
   %footer
-    =link_to 'new card',new_card_path
+    -if @parents and !@parents.empty?
+      =link_to 'new card',url_for(@parents.reverse)+'/cards/new'
+    -else
+      =link_to 'new card',new_card_path

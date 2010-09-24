@@ -1,0 +1,21 @@
+%section.physical{:class=>card.get_frame}
+  %h1
+    .title= card.title or ""
+    -if card.cost
+      .cost= card.cost
+  .picture
+    -if card.picture
+      %img{:src=>card.picture.source}
+  .type= card.type
+  .ability_box
+    -if card.ability
+      -card.ability.split("\r\n").each do |ability|
+        .ability= ability
+    -if card.flavor_text
+      .flavor_text=card.flavor_text
+  -if card.power and card.power != "" and card.toughness and card.toughness != ""
+    .power.toughness
+      %p= "#{card.power}/#{card.toughness}"
+  -elsif card.favor
+    .favor
+      %p=card.favor

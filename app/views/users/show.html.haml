@@ -1,4 +1,37 @@
 %section.user
   %header<
-    %h1=  @user.email
+    %h1=  @user.nickname
   %img{:src=>@user.avatar(400)}/
+  -if user_signed_in? and @user == current_user
+    =form_for @user do |f|
+      =f.text_field :nickname
+      =f.submit "change your nickname"
+  %section.friends
+    %header<
+      %h1 Friends
+    -if @user.friends.empty?
+      No Friends :(
+    -else
+      %ul
+        -@user.friends.each do |friend|
+          %li
+            %a{:href=>url_for(friend)}
+              .avatar
+                %img{:src=>friend.avatar(200)}
+              .name
+                =friend.nickname
+    -if user_signed_in? and @user != current_user and !current_user.is_friends_with? @user
+      =form_for @user do |f|
+        =hidden_field_tag :user,:friend_me
+        =f.submit "Friend Me"
+  %section.cards
+    %header<
+      %h1 Cards
+    -if @user.cards.empty?
+      No Cards :(
+    -else
+      %ul
+        -@user.cards.each do |card|
+          %li
+            %a{:href=>polymorphic_path([@user,card])}
+              =render :partial=>'cards/physical', :locals=>{:card=>card}

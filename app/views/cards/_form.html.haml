@@ -1,4 +1,4 @@
-- form_for(@card) do |f|
+= form_for(@card, :url=>url_for(@parents.reverse.push(@card))) do |f|
   - if @card.errors.any?
     %section.errorExplanation
       %header<

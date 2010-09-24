@@ -17,7 +17,9 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.create(params[:user])
+    @user = User.new(params[:user])
+    @user.nickname = @user.email
+    @user.save
     respond_with @user
   end
   
@@ -26,7 +28,21 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user.update_attributes(params[:user])
+    #check to see if the update was a friend request
+    if params[:user] == "friend_me"
+      unless @user.is_friends_with? current_user
+        logger.info("let's make friends!")
+        @user.make_friends(current_user,logger)
+      end
+      respond_with @user
+      return
+    end
+    
+    @user.attributes = params[:user]
+    if @user.nickname.nil? or @user.nickname == ""
+      @user.nickname = @user.email
+    end
+    @user.save
     respond_with @user
   end
   
