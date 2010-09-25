@@ -27,27 +27,28 @@ class SlotsController < ApplicationController
   
   def update
     #check for new tags
-    new_tag = params[:card_slot].delete(:tag_name)
-    unless new_tag.nil?
+    for_param(:card_slot,:tag_name) do |new_tag|
       @slot.add_tag new_tag
     end
     
     #check for deleted tags
-    deleted_tag = params[:card_slot].delete(:deleted_tag)
-    unless deleted_tag.nil?
+    for_param(:card_slot,:deleted_tag) do |deleted_tag|
       @slot.remove_tag deleted_tag
     end
     
     #check for cards being slotted
-    new_card = params[:card_slot].delete(:card)
-    unless new_card.nil?
+    for_param(:card_slot,:card) do |new_card|
       @slot.slot_card new_card
     end
     
     #check for cards being unslotted
-    cut_card = params[:card_slot].delete(:cut)
-    unless cut_card.nil?
+    for_param(:card_slot,:cut) do |cut_card|
       @slot.cut_card cut_card
+    end
+    
+    #check for unslotted cards
+    for_param(:card_slot,:unslot) do |unslot_card|
+      @slot.unslot_card unslot_card
     end
     
     @slot.update_attributes(params[:card_slot])

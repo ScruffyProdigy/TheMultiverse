@@ -1,7 +1,8 @@
 =render :partial=>'tags', :locals=>{:slot=>@slot}
 -for card in @slot.card_set.cards.submitted
-  %section.card
+  %article.set_card
     =render :partial=>'cards/physical', :locals=>{:card=>card}
-    =form_for @parents.reverse.push(@slot) do |f|
-      =f.hidden_field :card, :value=>card.id
-      =f.submit 'slot me!'
+    .actions
+      =form_for @parents.reverse.push(@slot) do |f|
+        =f.hidden_field :card, :value=>card.id
+        =f.submit 'slot me!'

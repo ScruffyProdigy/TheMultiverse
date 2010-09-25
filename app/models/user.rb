@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include MongoidArrayHelper
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
@@ -24,35 +25,24 @@ class User
   end
   
   def sets
-    ids = read_attribute(:sets)
-    if ids.nil?
-      ids = []
-    end
-    ids.map { |id| CardSet.find(id)}
+    map_array :sets,CardSet
   end
   
   def add_set the_set
-    current = read_attribute :sets
-    if current.nil?
-      current = [];
-    end
-    current<< the_set.id
-    write_attribute :sets,current
+    add_to_array :sets,the_set.id
     save
   end
 
   def friends
-    ids = read_attribute :friends
-    ids.map { |id|  User.find(id)}
+    map_array :friends,User
   end
   
   def is_friends_with? other_user
-    ids = read_attribute :friends
+    ids = read_array :friends
     ids.include? other_user.id
   end
   
-  def add_card the_card,logger
-    logger.info("#{cards.inspect}<<#{the_card.inspect}")
+  def add_card the_card
     cards<<the_card
   end
   
@@ -71,10 +61,8 @@ class User
   
 protected
 
-  def add_friend(friend,logger)
-    current = read_attribute :friends
-    current<< friend.id
-    write_attribute :friends,current
+  def add_friend friend
+    add_to_array :friends,friend.id
     save
   end
   # Returns a Gravatar URL associated with the email parameter.

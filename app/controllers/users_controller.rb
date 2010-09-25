@@ -31,8 +31,7 @@ class UsersController < ApplicationController
     #check to see if the update was a friend request
     if params[:user] == "friend_me"
       unless @user.is_friends_with? current_user
-        logger.info("let's make friends!")
-        @user.make_friends(current_user,logger)
+        @user.make_friends current_user
       end
       respond_with @user
       return
@@ -55,6 +54,7 @@ class UsersController < ApplicationController
   def find_user
     @user = User.find(params[:id])
     if @user.nil?
+      logger.info("user #{params[:id]} not found")
       redirect_to users_path
     end
   end

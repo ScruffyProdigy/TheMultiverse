@@ -5,19 +5,37 @@
     %header<
       %h1 slotted
     =link_to "edit slots",  url_for(@parents.reverse.push @set)+'/slots'
-    -for card in @set.cards.slotted
-      %article.card
-        =render :partial=>'cards/physical', :locals=>{:card=>card}
+    -for slot in @set.card_slots
+      -for card in slot.cards
+        %article.set_card
+          =render :partial=>'cards/physical', :locals=>{:card=>card}
+          .actions
+            =form_for @parents.reverse.push(@set).push(slot) do |f|
+              =f.hidden_field :cut, :value=>card.id
+              =f.submit "cut me"
+            =form_for @parents.reverse.push(@set).push(slot) do |f|
+              =f.hidden_field :unslot, :value=>card.id
+              =f.submit "unslot me"
   %section.submitted
     %header<
       %h1 submitted
     =link_to "submit a new card", new_card_set_card_path(@set)
     -for card in @set.cards.submitted
-      %article.card
+      %article.set_card
         =render :partial=>'cards/physical', :locals=>{:card=>card}
+        .actions
+          =form_for @parents.reverse.push(@set) do |f|
+            =f.hidden_field :cut_card, :value=>card.id
+            =f.submit 'cut me'
+          =link_to 'slot me',@parents.reverse.push(@set).push(card)
   %section.cut
     %header<
       %h1 cut
     -for card in @set.cards.cut
-      %article.card
+      %article.set_card
         =render :partial=>'cards/physical', :locals=>{:card=>card}
+        .actions
+          =form_for @parents.reverse.push(@set) do |f|
+            =f.hidden_field :resubmit_card, :value=>card.id
+            =f.submit 'resubmit me'
+          =link_to 'slot me',@parents.reverse.push(@set).push(card)

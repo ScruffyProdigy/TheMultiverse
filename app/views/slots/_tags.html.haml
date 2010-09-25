@@ -3,3 +3,6 @@
     -for tag in slot.tags
       %span.tag><
         =tag
+        =form_for @parents.reverse.push(slot) do |f|
+          =f.hidden_field :deleted_tag, :value=>tag
+          =f.submit 'x'

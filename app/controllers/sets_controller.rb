@@ -31,14 +31,21 @@ class SetsController < ApplicationController
   end
   
   def update
-    new_slots = params[:card_set].delete(:new_slots)
-    unless new_slots.nil?
-      new_slots.to_i.times do
-        slot = CardSlot.new
-        @set.card_slots<<slot
-        slot.save
-      end
+    #check for new card slots
+    for_param(:card_set,:new_slots) do |new_slots|
+      @set.add_slots new_slots.to_i
     end
+    
+    #check for cutting cards
+    for_param(:card_set,:cut_card) do |cut_card|
+      @set.cut_card cut_card
+    end
+    
+    #check for resubmitting cards
+    for_param(:card_set,:resubmit_card) do |resubmitted_card|
+      @set.resubmit_card resubmitted_card
+    end
+    
     @set.update_attributes(params[:card_set])
     respond_with @set
   end
