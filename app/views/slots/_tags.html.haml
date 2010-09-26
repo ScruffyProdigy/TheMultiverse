@@ -6,7 +6,7 @@
         =form_for [slot.card_set,slot], :class=>:x do |f|
           =f.hidden_field :deleted_tag, :value=>tag
           =f.submit 'x'
-  %span.tag.new_tag><
+  %span.tag.new_tag{:class=>((slot.tags.nil? or slot.tags.empty?) && 'necessary')}><
     =form_for [slot.card_set,slot] do |f|
       =f.text_field :tag_name,  :value=>'', :placeholder=>'tag name'
       =f.submit 'add tag'

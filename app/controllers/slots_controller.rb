@@ -29,11 +29,17 @@ class SlotsController < ApplicationController
     #check for new tags
     for_param(:card_slot,:tag_name) do |new_tag|
       @slot.add_tag new_tag
+      @slot.save
+      respond_with @slot, :location=>@slot.card_set
+      return
     end
     
     #check for deleted tags
     for_param(:card_slot,:deleted_tag) do |deleted_tag|
       @slot.remove_tag deleted_tag
+      @slot.save
+      respond_with @slot, :location=>@slot.card_set
+      return
     end
     
     @slot.update_attributes(params[:card_slot])

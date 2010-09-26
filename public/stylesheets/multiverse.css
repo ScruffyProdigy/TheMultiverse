@@ -295,8 +295,21 @@ Physical Magic Card
 	
 }
 
+
 .new_tag form {
 	display: inline;
+}
+
+.new_tag {
+	display: none;
+}
+
+.tags .necessary{
+	display: inline-block;	
+}
+
+.tags:hover .new_tag{
+	display: block;
 }
 
 .tag:hover{

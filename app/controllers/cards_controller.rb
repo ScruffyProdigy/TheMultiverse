@@ -31,7 +31,7 @@ class CardsController < ApplicationController
     @card.updater = current_user
     @parents[0].add_card @card
     @card.save
-    respond_with @card, :location=>@parents.reverse.push(@card)
+    respond_with @card, :location=>@parents[0]
   end
   
   def edit
@@ -59,7 +59,7 @@ class CardsController < ApplicationController
     
     @card.attributes = params[:card]
     @card.save
-    respond_with @card, :location=>@parents.reverse.push(@card)
+    respond_with @card, :location=>@card.owner
   end
   
   def destroy
