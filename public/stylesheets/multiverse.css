@@ -7,7 +7,13 @@
 	http://localhost:3000/stylesheets/multiverse.css?1284582533
 	http://localhost:3000/stylesheets/multiverse.css?1284589527
 	http://localhost:3000/stylesheets/multiverse.css?1284591380
+	http://localhost:3000/stylesheets/multiverse.css?1285384062
+	http://localhost:3000/stylesheets/multiverse.css?1285447458
+	http://localhost:3000/stylesheets/multiverse.css?1285450369
+	http://localhost:3000/stylesheets/multiverse.css?1285452495
+	http://localhost:3000/stylesheets/multiverse.css?1285456858
 */
+
 section, article, header, footer, nav, aside, hgroup {
 	display: block;
 }
@@ -112,18 +118,19 @@ Physical Magic Card
 	float:left;
 }
 
+.magicCard .physical {
+	margin: 0px auto;
+}
+
 .physical{
 	height: 3.5in;
 	width: 2.5in;
-	margin: 0px auto;
 	border-width: .15in;
 	border-style: solid;
 	border-radius: .1in;
-	position: relative;
 	background-color: #be1dce;
+	position: relative;
 }
-
-
 .physical.white{
 	background-color: #fffbd5;
 }
@@ -226,11 +233,16 @@ Physical Magic Card
 	float: right;
 }
 
-.physical .ability_box, .magicCard .physical .picture{
+.physical .ability_box, .physical .picture{
 	border-width: .03in;
 	border-style: solid;
 	margin-right: .05in;
 	margin-left: .05in;
+}
+
+.physical .ability_box {
+	position: absolute;
+	width: 2.385in;
 }
 
 .physical .picture {
@@ -243,11 +255,10 @@ Physical Magic Card
 
 .physical .ability_box {
 	height: 1.225in;
-	position: relative;
 	background-color: #fff1f2;
 }
 
-.physical .ability_box .flavor_text,.magicCard .physical .ability_box .ability {
+.physical .ability_box .flavor_text, .physical .ability_box .ability {
 	margin: .035in;
 	font-size: .15in;
 }
@@ -256,4 +267,126 @@ Physical Magic Card
 	font-style: italic;
 	margin-top: .1in;
 	bottom: 0px;
+}
+
+/*tags*/
+
+.tags {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.tag {
+	border-style: solid;
+	border-width: 1.5px;
+	border-radius: 15px;
+	padding: 1px 5px 1px 5px;
+	margin: 1px;
+	display: inline-block;
+}
+
+.tag form {
+	display: none;
+	visibility: visible;
+	max-width: 150px;
+	
+}
+
+.new_tag form {
+	display: inline;
+}
+
+.tag:hover{
+	padding-right: 1px;
+}
+
+.tag:hover form{
+	position: static;
+	display: inline;
+}
+
+.tag form input {
+	display: inline;
+}
+
+.card_slot {
+	border-style: solid;
+	margin: 5px;
+	border-radius: 3px;
+	position: relative;
+}
+
+.set_card {
+	margin: 5px;
+	display: inline-block;
+	position: relative;
+}
+
+.set_card .physical {
+	display: inline-block;
+}
+
+.source {
+	position: relative;
+}
+
+.source ul.actions {
+	display: inline;
+	position: absolute;
+	top: -15px;
+	right: 0;
+	border-style: solid;
+	background-color: #ffffff;
+	opacity: 100%;
+	list-style: none;
+	visibility: hidden;
+	padding: 0px;
+	z-index: 1;
+}
+
+.source:hover ul.actions {
+	visibility: visible;
+}
+
+.source:hover .source ul.actions{
+	visibility: hidden;
+}
+
+.source .source:hover ul.actions{
+	visibility: visible;
+}
+
+.source:hover .source .source ul.actions{
+	visibility: hidden;
+}
+
+.source .source .source:hover ul.actions{
+	visibility: visible;
+}
+
+.source:hover .source .source .source ul.actions{
+	visibility: hidden;
+}
+
+.source .source .source .source:hover ul.actions{
+	visibility: visible;
+}
+
+.source:hover .source .source .source .source ul.actions{
+	visibility: hidden;
+}
+
+.source .source .source .source .source:hover ul.actions{
+	visibility: visible;
+}
+
+
+ul.actions li {
+	padding:	10px;
+	margin:		0px;
+}
+
+ul.actions li:hover {
+	background-color: #edd;
 }

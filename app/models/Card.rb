@@ -10,6 +10,7 @@ class Card
   field :power
   field :toughness
   field :status
+  field :favor
   
   referenced_in :user
   embeds_many :comments
@@ -67,10 +68,10 @@ class Card
       end
     end
     if frame == ''
-      if self.type.downcase.includes? 'land'
+      if self.type.downcase.include? 'land'
         return 'land'
       end
-      if self.type.downcase.includes? 'artifact'
+      if self.type.downcase.include? 'artifact'
         return 'artifact'
       end
       return 'purple'

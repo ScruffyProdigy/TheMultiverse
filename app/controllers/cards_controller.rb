@@ -29,7 +29,7 @@ class CardsController < ApplicationController
     @card = Card.new(params[:card])
     @card.user = current_user
     @card.updater = current_user
-    @parents[0].add_card @card,logger
+    @parents[0].add_card @card
     @card.save
     respond_with @card, :location=>@parents.reverse.push(@card)
   end

@@ -33,6 +33,7 @@ class SlotsController < ApplicationController
     
     #check for deleted tags
     for_param(:card_slot,:deleted_tag) do |deleted_tag|
+      logger.info("deleting tag: #{deleted_tag}")
       @slot.remove_tag deleted_tag
     end
     

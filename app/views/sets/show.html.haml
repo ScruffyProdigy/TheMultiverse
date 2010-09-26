@@ -1,41 +1,52 @@
 %section.cardset
   %header<
     %h1=  @set.name
-  %section.slotted
-    %header<
-      %h1 slotted
-    =link_to "edit slots",  url_for(@parents.reverse.push @set)+'/slots'
-    -for slot in @set.card_slots
-      -for card in slot.cards
-        %article.set_card
-          =render :partial=>'cards/physical', :locals=>{:card=>card}
-          .actions
-            =form_for @parents.reverse.push(@set).push(slot) do |f|
-              =f.hidden_field :cut, :value=>card.id
-              =f.submit "cut me"
-            =form_for @parents.reverse.push(@set).push(slot) do |f|
-              =f.hidden_field :unslot, :value=>card.id
-              =f.submit "unslot me"
-  %section.submitted
+  %section.submitted.source
     %header<
       %h1 submitted
-    =link_to "submit a new card", new_card_set_card_path(@set)
+    %ul.actions
+      %li
+        =link_to "submit a new card", new_card_set_card_path(@set), :class=>:action
     -for card in @set.cards.submitted
-      %article.set_card
+      %article.set_card.source
         =render :partial=>'cards/physical', :locals=>{:card=>card}
-        .actions
-          =form_for @parents.reverse.push(@set) do |f|
-            =f.hidden_field :cut_card, :value=>card.id
-            =f.submit 'cut me'
-          =link_to 'slot me',@parents.reverse.push(@set).push(card)
-  %section.cut
+        %ul.actions
+          %li
+            =form_for @parents.reverse.push(@set) do |f|
+              =f.hidden_field :cut_card, :value=>card.id
+              =f.submit 'cut me', :class=>:action
+          %li
+            =link_to 'slot me',@parents.reverse.push(@set).push(card), :class=>:action
+          %li
+            =link_to 'edit me',url_for(@parents.reverse.push(@set).push(card))+'/edit', :class=>:action
+          %li
+            =link_to 'my comments', url_for(@parents.reverse.push(@set).push(card)), :class=>:action
+  %section.slotted.source
+    %header<
+      %h1 slotted
+    %ul.actions
+      %li
+        =link_to "edit slots", url_for(@parents.reverse.push @set)+'/slots', :class=>:action
+      %li
+        =form_for @set do |f|
+          =f.text_field :new_slots, :value=>'', :placeholder=>'number of slots to add'
+          =f.submit 'add card slots', :class=>:action
+    -for slot in @set.card_slots
+      =render :partial=>'slots/slot', :locals=>{:slot=>slot}
+  %section.cut.source
     %header<
       %h1 cut
     -for card in @set.cards.cut
-      %article.set_card
+      %article.set_card.source
         =render :partial=>'cards/physical', :locals=>{:card=>card}
-        .actions
-          =form_for @parents.reverse.push(@set) do |f|
-            =f.hidden_field :resubmit_card, :value=>card.id
-            =f.submit 'resubmit me'
-          =link_to 'slot me',@parents.reverse.push(@set).push(card)
+        %ul.actions
+          %li
+            =form_for @parents.reverse.push(@set) do |f|
+              =f.hidden_field :resubmit_card, :value=>card.id
+              =f.submit 'resubmit me', :class=>:action
+          %li
+            =link_to 'slot me',@parents.reverse.push(@set).push(card), :class=>:action
+          %li
+            =link_to 'edit me',url_for(@parents.reverse.push(@set).push(card))+'/edit', :class=>:action
+          %li
+            =link_to 'my comments', url_for(@parents.reverse.push(@set).push(card)), :class=>:action

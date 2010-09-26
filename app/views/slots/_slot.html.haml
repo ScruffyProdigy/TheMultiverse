@@ -1,0 +1,23 @@
+%article.card_slot.source{:class=>slot.status}
+  %section.tag_info
+    =render :partial => 'slots/tags', :locals=>{:slot=>slot}
+  %section.card_info
+    -for card in slot.cards
+      %article.set_card.source
+        =render :partial=>'cards/physical', :locals=>{:card=>card}
+        %ul.actions
+          %li
+            =form_for [slot.card_set,slot] do |f|
+              =f.hidden_field :cut, :value=>card.id
+              =f.submit "cut", :class=>:action
+          %li
+            =form_for [slot.card_set,slot] do |f|
+              =f.hidden_field :unslot, :value=>card.id
+              =f.submit "unslot", :class=>:action
+          %li
+            =link_to 'edit card', url_for([card.owner,card])+'/edit', :class=>:action
+          %li
+            =link_to 'view comments', url_for([card.owner,card]), :class=>:action
+  %ul.actions
+    %li
+      =link_to 'fill slot',[slot.card_set,slot], :class=>:action

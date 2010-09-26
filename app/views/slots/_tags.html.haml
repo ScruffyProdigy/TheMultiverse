@@ -1,8 +1,12 @@
--unless slot.tags.nil?
-  .tags<
+.tags<
+  -unless slot.tags.nil?
     -for tag in slot.tags
       %span.tag><
         =tag
-        =form_for @parents.reverse.push(slot) do |f|
+        =form_for [slot.card_set,slot], :class=>:x do |f|
           =f.hidden_field :deleted_tag, :value=>tag
           =f.submit 'x'
+  %span.tag.new_tag><
+    =form_for [slot.card_set,slot] do |f|
+      =f.text_field :tag_name,  :value=>'', :placeholder=>'tag name'
+      =f.submit 'add tag'
