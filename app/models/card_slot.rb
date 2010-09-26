@@ -15,38 +15,14 @@ class CardSlot
     save
   end
   
-  def slot_card card
-    card = card_set.cards.find(card)
-    if card.status == 'slotted'
-      #ERROR: We need to unslot the card right here
-    end
-    card.status = 'slotted'
-    card.save
-
+  def add_card card
     add_to_array :cards,card.id
     save
   end
   
-  def cut_card card
-    card = card_set.cards.find(card)
-    result = remove_from_array :cards,card.id
+  def remove_card card
+    remove_from_array :cards,card.id
     save
-    
-    unless result.nil?
-      card.status = 'cut'
-      card.save
-    end
-  end
-
-  def unslot_card card
-    card = card_set.cards.find(card)
-    result = remove_from_array :cards,card.id
-    save
-
-    unless result.nil?
-      card.status = 'submitted'
-      card.save
-    end
   end
   
   def cards

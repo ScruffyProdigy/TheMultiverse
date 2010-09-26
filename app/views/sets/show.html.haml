@@ -4,30 +4,30 @@
   %section.submitted.card_section.source
     %header<
       %h1 submitted
-    =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/a_new_card',:locals=>{:set=>@set}}]}
+    =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/new_card',:locals=>{:set=>@set}}]}
     -for card in @set.cards.submitted
       %article.set_card.source
         =render :partial=>'cards/physical', :locals=>{:card=>card}
-        =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/a_cut_card',:locals=>{:card=>card}},
-          {:partial=>'sets/a_view_card',:locals=>{:set=>@set,:card=>card}},
-          {:partial=>'sets/a_edit_card',:locals=>{:set=>@set,:card=>card}}]}
+        =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/cut_card',:locals=>{:card=>card}},
+          {:partial=>'sets/view_card',:locals=>{:set=>@set,:card=>card}},
+          {:partial=>'sets/edit_card',:locals=>{:set=>@set,:card=>card}}]}
   %section.slotted.card_section.source
     %header<
       %h1 slotted
-    =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/a_edit_slots',:locals=>{:set=>@set}},
-      {:partial=>'sets/a_add_slots',:locals=>{:set=>@set}}]}
+    =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/edit_slots',:locals=>{:set=>@set}},
+      {:partial=>'sets/add_slots',:locals=>{:set=>@set}}]}
     -for slot in @set.card_slots
-      =render :partial=>'slots/slot', :locals=>{:slot=>slot,:card_actions=>[{:partial=>'sets/a_cut_card',:locals=>{:card=>card}},
-        {:partial=>'sets/a_unslot_card',:locals=>{:card=>card}},
-        {:partial=>'sets/a_view_card',:locals=>{:card=>card}},
-        {:partial=>'sets/a_edit_card',:locals=>{:card=>card}}],
-        :slot_actions=>[{:partial=>'slots/a_fill_slot',:locals=>{:slot=>slot}}]}
+      =render :partial=>'slots/slot', :locals=>{:slot=>slot,:card_actions=>[{:partial=>'sets/cut_card',:locals=>{}},
+        {:partial=>'sets/unslot_card',:locals=>{:card=>card}},
+        {:partial=>'sets/view_card',:locals=>{:card=>card}},
+        {:partial=>'sets/edit_card',:locals=>{:card=>card}}],
+        :slot_actions=>[{:partial=>'slots/fill_slot',:locals=>{:slot=>slot}}]}
   %section.cut.card_section.source
     %header<
       %h1 cut
     -for card in @set.cards.cut
       %article.set_card.source
         =render :partial=>'cards/physical', :locals=>{:card=>card}
-        =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/a_resubmit_card',:locals=>{:card=>card}},
-          {:partial=>'sets/a_view_card',:locals=>{:card=>card}},
-          {:partial=>'sets/a_edit_card',:locals=>{:card=>card}}]}
+        =render :partial=>'shared/actions', :locals=>{:actions=>[{:partial=>'sets/resubmit_card',:locals=>{:card=>card}},
+          {:partial=>'sets/view_card',:locals=>{:card=>card}},
+          {:partial=>'sets/edit_card',:locals=>{:card=>card}}]}

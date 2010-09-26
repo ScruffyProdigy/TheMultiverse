@@ -5,5 +5,8 @@
     -for card in slot.cards
       %article.set_card.source
         =render :partial=>'cards/physical', :locals=>{:card=>card}
-        =render :partial=>'shared/actions', :locals=>{:actions=>card_actions}
+        -the_card_actions = Array.new(card_actions)
+        -for action in the_card_actions
+          -action[:locals].merge!({:card=>card})
+        =render :partial=>'shared/actions', :locals=>{:actions=>the_card_actions}
   =render :partial=>'shared/actions', :locals=>{:actions=>slot_actions}

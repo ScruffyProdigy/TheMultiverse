@@ -2,4 +2,4 @@
   %ul.actions
     -for action in actions
       %li
-        =render :partial=>(action[:partial]), :locals=>action[:locals]
+        =render :partial=>(actionize action[:partial]), :locals=>action[:locals]

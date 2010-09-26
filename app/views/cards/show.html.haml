@@ -3,11 +3,11 @@
     %h1= @card.title
     .wrapper.source
       =render :partial=>"physical", :locals=>{:card=>@card}
-      -actions = [{:partial=>'cards/a_other_cards',:locals=>{}}]
+      -actions = [{:partial=>'cards/other_cards',:locals=>{}}]
       -if user_signed_in?
         -if @card.editor_permissions?( current_user)
-          -actions.unshift( {:partial=>'cards/a_trash',:locals=>{:card=>@card}})
-          -actions.unshift( {:partial=>'cards/a_edit',:locals=>{:card=>@card}})
+          -actions.unshift( {:partial=>'cards/trash',:locals=>{:card=>@card}})
+          -actions.unshift( {:partial=>'cards/edit',:locals=>{:card=>@card}})
       =render :partial=>"shared/actions",:locals=>{:actions=>actions}
   -if user_signed_in?
     =render :partial=>'shared/shared_block', :locals=>{:user=>current_user,:type=>'new_comment',:object=>Array.new(@parents).reverse.push(@card), :callback=>'comments/new_comment'}
@@ -15,4 +15,4 @@
 -if @card.owner.class == CardSet
   -for slot in @card.owner.card_slots
     %article.slot
-      =render :partial=>'slots/slot', :locals=>{:slot=>slot,:slot_actions=>[{:partial=>'slots/a_fill_slot_with_card',:locals=>{:slot=>slot,:card=>@card}}]}
+      =render :partial=>'slots/slot', :locals=>{:slot=>slot,:card_actions=>[],:slot_actions=>[{:partial=>'slots/fill_slot_with_card',:locals=>{:slot=>slot,:card=>@card}}]}

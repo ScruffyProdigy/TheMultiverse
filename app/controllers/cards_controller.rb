@@ -39,8 +39,25 @@ class CardsController < ApplicationController
   end
   
   def update
-    @card.attributes = params[:card]
     @card.updater = current_user
+    
+    for_param(:card,:submit) do
+      @card.submit_card
+      @card.save
+    end
+    
+    for_param(:card,:cut) do
+      @card.cut_card
+      @card.save
+    end
+    
+    for_param(:card,:slot) do |slot_id|
+      slot = @card.owner.card_slots.find(slot_id)
+      @card.slot_card slot
+      @card.save
+    end
+    
+    @card.attributes = params[:card]
     @card.save
     respond_with @card, :location=>@parents.reverse.push(@card)
   end

@@ -12,6 +12,8 @@ class Card
   field :status
   field :favor
   
+  field :slot
+  
   referenced_in :user
   embeds_many :comments
   embeds_many :alterations
@@ -22,6 +24,46 @@ class Card
   scope :cut, where(:status=>'cut')
   
   before_update :register_changes
+  
+  def slot
+    slot_id = read_attribute :slot
+    owner.card_slots.find(slot_id)
+  end
+  
+  def slot= the_slot
+    if the_slot.nil?
+      write_attribute :slot,nil
+    else
+      write_attribute :slot,the_slot.id
+    end
+  end
+  
+  def unslot_card
+    the_slot = slot
+    unless the_slot.nil?
+      the_slot.remove_card self
+      slot = nil
+    end
+  end
+  
+  def set_status new_status
+    unslot_card
+    write_attribute :status,new_status
+  end
+  
+  def slot_card the_slot
+    set_status 'slotted'
+    write_attribute :slot,the_slot.id
+    the_slot.add_card self
+  end
+  
+  def submit_card
+    set_status 'submitted'
+  end
+  
+  def cut_card
+    set_status 'cut'
+  end
   
   def updater= last_updater
     @updater = last_updater

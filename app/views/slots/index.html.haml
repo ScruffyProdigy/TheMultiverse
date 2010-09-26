@@ -1,5 +1,5 @@
 -for slot in @slots
-  =render :partial=>'slot', :locals=>{:slot=>slot,:actions=>[{:partial=>'slots/a_fill_slot',:locals=>{:slot=>slot}}]}
+  =render :partial=>'slot', :locals=>{:slot=>slot,:slot_actions=>[{:partial=>'slots/fill_slot',:locals=>{:slot=>slot}}],:card_actions=>[]}
 =form_for @parents.reverse do |f|
   =f.text_field :new_slots, :value=>'', :placeholder=>'number of slots to add'
   =f.submit 'add card slots'

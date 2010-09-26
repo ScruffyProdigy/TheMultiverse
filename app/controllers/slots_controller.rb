@@ -33,23 +33,7 @@ class SlotsController < ApplicationController
     
     #check for deleted tags
     for_param(:card_slot,:deleted_tag) do |deleted_tag|
-      logger.info("deleting tag: #{deleted_tag}")
       @slot.remove_tag deleted_tag
-    end
-    
-    #check for cards being slotted
-    for_param(:card_slot,:card) do |new_card|
-      @slot.slot_card new_card
-    end
-    
-    #check for cards being unslotted
-    for_param(:card_slot,:cut) do |cut_card|
-      @slot.cut_card cut_card
-    end
-    
-    #check for unslotted cards
-    for_param(:card_slot,:unslot) do |unslot_card|
-      @slot.unslot_card unslot_card
     end
     
     @slot.update_attributes(params[:card_slot])
