@@ -1,0 +1,5 @@
+-unless actions.empty?
+  %ul.actions
+    -for action in actions
+      %li
+        =render :partial=>(action[:partial]), :locals=>action[:locals]

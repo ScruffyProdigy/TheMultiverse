@@ -1,4 +1,4 @@
-=render :partial=>'slot', :locals=>{:slot=>@slot}
+=render :partial=>'slots/slot', :locals=>{:slot=>@slot,:slot_actions=>[]}
 -for card in @slot.card_set.cards.submitted
   %article.set_card.source
     =render :partial=>'cards/physical', :locals=>{:card=>card}

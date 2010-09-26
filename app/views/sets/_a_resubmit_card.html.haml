@@ -1,0 +1,3 @@
+=form_for card.owner do |f|
+  =f.hidden_field :resubmit_card, :value=>card.id
+  =f.submit 'resubmit me', :class=>:action

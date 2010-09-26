@@ -17,6 +17,9 @@ class CardSlot
   
   def slot_card card
     card = card_set.cards.find(card)
+    if card.status == 'slotted'
+      #ERROR: We need to unslot the card right here
+    end
     card.status = 'slotted'
     card.save
 

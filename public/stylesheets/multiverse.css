@@ -12,6 +12,7 @@
 	http://localhost:3000/stylesheets/multiverse.css?1285450369
 	http://localhost:3000/stylesheets/multiverse.css?1285452495
 	http://localhost:3000/stylesheets/multiverse.css?1285456858
+	http://localhost:3000/stylesheets/multiverse.css?1285461110
 */
 
 section, article, header, footer, nav, aside, hgroup {
@@ -284,6 +285,7 @@ Physical Magic Card
 	padding: 1px 5px 1px 5px;
 	margin: 1px;
 	display: inline-block;
+	background-color: #bbe;
 }
 
 .tag form {
@@ -301,6 +303,10 @@ Physical Magic Card
 	padding-right: 1px;
 }
 
+.new_tag:hover{
+	padding-right: 5px;
+}
+
 .tag:hover form{
 	position: static;
 	display: inline;
@@ -310,11 +316,29 @@ Physical Magic Card
 	display: inline;
 }
 
+/*
+Card Slots
+*/
+
 .card_slot {
 	border-style: solid;
 	margin: 5px;
 	border-radius: 3px;
 	position: relative;
+	padding: 10px;
+	display: inline-block;
+}
+
+.card_slot.overslotted {
+	background-color: #ebb;
+}
+
+.card_slot.underslotted {
+	background-color: #eeb;
+}
+
+.card_slot.filled {
+	background-color: #beb;
 }
 
 .set_card {
@@ -327,6 +351,10 @@ Physical Magic Card
 	display: inline-block;
 }
 
+/*
+sources and actions
+*/
+
 .source {
 	position: relative;
 }
@@ -335,7 +363,7 @@ Physical Magic Card
 	display: inline;
 	position: absolute;
 	top: -15px;
-	right: 0;
+	right: -40px;
 	border-style: solid;
 	background-color: #ffffff;
 	opacity: 100%;
@@ -389,4 +417,12 @@ ul.actions li {
 
 ul.actions li:hover {
 	background-color: #edd;
+}
+
+/* card sections */
+.card_section {
+	border-style: solid;
+	background-color: #eee;
+	margin: 10px;
+	padding: 5px;
 }

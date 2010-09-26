@@ -1,20 +1,18 @@
-%article.magicCard.source
+%article.magicCard
   %header<
     %h1= @card.title
-    =render :partial=>"physical", :locals=>{:card=>@card}
-    %ul.actions
+    .wrapper.source
+      =render :partial=>"physical", :locals=>{:card=>@card}
+      -actions = [{:partial=>'cards/a_other_cards',:locals=>{}}]
       -if user_signed_in?
         -if @card.editor_permissions?( current_user)
-          %li= button_to( 'trash this card', @card, :method=>:delete, :class=>:action)
-          %li= button_to( 'make some changes', edit_card_path(@card), :method=>:get, :class=>:action)
-      %li= button_to( 'other cards', cards_path, :method=>:get, :class=>:action)
+          -actions.unshift( {:partial=>'cards/a_trash',:locals=>{:card=>@card}})
+          -actions.unshift( {:partial=>'cards/a_edit',:locals=>{:card=>@card}})
+      =render :partial=>"shared/actions",:locals=>{:actions=>actions}
   -if user_signed_in?
     =render :partial=>'shared/shared_block', :locals=>{:user=>current_user,:type=>'new_comment',:object=>Array.new(@parents).reverse.push(@card), :callback=>'comments/new_comment'}
   =render :partial=>'events/event_list', :locals=>{:events=>@card.events}
 -if @card.owner.class == CardSet
   -for slot in @card.owner.card_slots
     %article.slot
-      =render :partial=>'slots/tags', :locals=>{:slot=>slot}
-      =form_for [slot.card_set,slot] do |f|
-        =f.hidden_field :card, :value=>@card.id
-        =f.submit 'fill this slot'
+      =render :partial=>'slots/slot', :locals=>{:slot=>slot,:slot_actions=>[{:partial=>'slots/a_fill_slot_with_card',:locals=>{:slot=>slot,:card=>@card}}]}
